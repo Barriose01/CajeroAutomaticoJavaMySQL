@@ -9,7 +9,7 @@ public class MenuPrincipalCajero {
 	public MenuPrincipalCajero(String rut, String dv, String id) {
 		this.rut = rut;
 		this.dv = dv;
-		this.id = dv;
+		this.id = id;
 		this.saldo = this.obtenerSaldo();
 		
 	}
@@ -148,6 +148,7 @@ public class MenuPrincipalCajero {
 		ArrayList<String> movimientos = bd.movimineots(this.id);
 		if(movimientos.size() > 0) {
 			
+			Collections.reverse(movimientos);
 			//i Va a incrementar de 3 en 3
 			for(int i =0; i < movimientos.size(); i+=3) {
 				if(movimientos.get(i + 1).equals("SE REALIZO UN RETIRO")) {
@@ -155,12 +156,9 @@ public class MenuPrincipalCajero {
 				}else if(movimientos.get(i + 1).equals("SE REALIZO UN DEPOSITO")) {
 					signo = "+$";
 				}
-				System.out.println(signo + movimientos.get(i) + ". " + movimientos.get(i+1) + " con fecha " + movimientos.get(i + 2));
+				System.out.println(signo + movimientos.get(i + 2) + ". " + movimientos.get(i+1) + " con fecha " + movimientos.get(i));
 
 			}
-			
-			
-			
 			
 		}else {
 			System.out.println("No hay movimientos para mostrar");
