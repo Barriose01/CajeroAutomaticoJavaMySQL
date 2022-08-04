@@ -54,9 +54,14 @@ public class MenuPrincipalCajero {
 	}
 	private float obtenerSaldo() {
 		Float saldo = 0F;
-		ArrayList<String> cuentas = bd.cuentaExiste(this.rut, this.dv);
-		String saldoString = cuentas.get(6);
-		saldo = Float.parseFloat(saldoString);
+		try {
+			ArrayList<String> cuentas = bd.cuentaExiste(this.rut, this.dv);
+			String saldoString = cuentas.get(6);
+			saldo = Float.parseFloat(saldoString);
+		}catch(Exception e) {
+			System.out.println("Error al recuperar el saldo de la cuenta");
+		}
+		
 		return saldo;
 	}
 	private void menuRetiro() {

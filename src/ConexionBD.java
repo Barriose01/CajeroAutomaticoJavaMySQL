@@ -54,17 +54,20 @@ public class ConexionBD {
 		}
 	}
 	public void registrarLog(String rut, String dv) {
-		ArrayList<String> cuentas = this.cuentaExiste(rut, dv);
-		String id = "";
-		id = cuentas.get(0);
 		try {
+			ArrayList<String> cuentas = this.cuentaExiste(rut, dv);
+			String id = "";
+			id = cuentas.get(0);
 			String sql = "INSERT INTO logCuentaUsuario(idUsuario,informacion) VALUES('" + id 
 					+ "', 'SE CREO UNA NUEVA CUENTA')";
 			Statement statement = (Statement) this.cn.createStatement();
 			statement.execute(sql);
+			System.out.println("La cuenta ha sido registrada con exito");
 		}catch(Exception e) {
-			System.out.println("Error al registrar la informacion en la cuenta");
+			System.out.println("Error al registrar la informacion de la cuenta");
 		}
+		
+		
 	}
 	public void retiro(String rut, String dv, String id, Float saldo, float monto) {
 		try {

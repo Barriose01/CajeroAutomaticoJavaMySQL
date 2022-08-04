@@ -50,21 +50,24 @@ public class MenuInicioCajero {
 			if(!clave.equals(clave2)) {
 				System.out.println("Las claves no coinciden");
 			}else {
-				boolean cuentaValida = validarDatosIngresados(rut,dv,clave);
-				if(!cuentaValida) {System.out.println("\nDebe ingresar informacion valida. Revise su rut, dv o clave");}
-				else {
-					ArrayList<String> cuentas = bd.cuentaExiste(rut, dv);
-					if(cuentas.size() > 0) {
-						System.out.println("\nLo sentimos, la cuenta ingresada ya existe");
-					}else {
-						bd.registrarUsuario(rut, dv, clave, nombre, apellido);
-						bd.registrarLog(rut, dv);
-						System.out.println("La cuenta ha sido registrada con exito");
-						
+				try {
+					boolean cuentaValida = validarDatosIngresados(rut,dv,clave);
+					if(!cuentaValida) {System.out.println("\nDebe ingresar informacion valida. Revise su rut, dv o clave");}
+					else {
+						ArrayList<String> cuentas = bd.cuentaExiste(rut, dv);
+						if(cuentas.size() > 0) {
+							System.out.println("\nLo sentimos, la cuenta ingresada ya existe");
+						}else {
+							bd.registrarUsuario(rut, dv, clave, nombre, apellido);
+							bd.registrarLog(rut, dv);
+						}
 					}
-					break;
+				}catch(Exception e) {
+					System.out.println("Error al registrar la cuenta");
 				}
+				break;
 			}
+			
 		}
 	}
 	private static void iniciarSesion() {
@@ -99,10 +102,8 @@ public class MenuInicioCajero {
 	}
 
 	public static void main(String[] args) {
-		
 		String opcion;
 		int parseOpcion, salida = 0;
-		
 		while(salida == 0) {
 			System.out.println("\n(1): Registrar Cuenta");
 			System.out.println("(2): Iniciar Sesion");
