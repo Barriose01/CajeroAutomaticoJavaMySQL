@@ -80,7 +80,7 @@ public class ConexionBD {
 			System.out.println("Error al realizar el retiro");
 		}
 	}
-	public void deposito(String rut, String dv, String id, Float saldo, float monto) {
+	public void deposito(String rut, String dv, String id, float saldo, float monto) {
 		try {
 			String sql = "CALL deposito('" + rut + "', '" + dv + "', '" + id + "',  '" + saldo + "', '" + monto + "')";
 			Statement statement = (Statement) cn.createStatement();
@@ -89,6 +89,23 @@ public class ConexionBD {
 			System.out.println("SALDO: $" + saldo);
 		}catch(Exception e) {
 			System.out.println("Error al realizar el deposito");
+		}
+	}
+	public void transferencia(String rut, String dv, String id, float saldo, String rutTransferencia, 
+			String dvTransferencia, String idTransferencia, float saldoTransferencia, float monto ) {
+		
+		try {
+			String sql = "CALL transferencia('" + rut + "', '" + dv + "', '" + id + "','" + saldo + "', '" 
+		+ rutTransferencia + "', '" + dvTransferencia + "', '" + idTransferencia + "', '" + saldoTransferencia
+		+ "', '" + monto + "')";
+			
+			Statement statement = (Statement) cn.createStatement();
+			statement.execute(sql);
+			System.out.println("\nLa transferencia se ha realizado con exito");
+			System.out.println("MONTO: $" + monto);
+			System.out.println("SALDO: $" + saldo);
+		}catch(Exception e) {
+			System.out.println("Error al realizar la transferencia");
 		}
 	}
 	public ArrayList<String> movimineots(String id) {

@@ -4,7 +4,7 @@ public class MenuInicioCajero {
 	static Scanner sc = new Scanner(System.in);
 	static ConexionBD bd = new ConexionBD();
 	
-	private static boolean validarDatosIngresados(String rut, String dv, String clave) {
+	public static boolean validarDatosIngresados(String rut, String dv, String clave) {
 		boolean sonValidos = true;
 		int parseRut,parseClave, parseDV;		
 		try {

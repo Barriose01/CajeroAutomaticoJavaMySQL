@@ -20,8 +20,9 @@ public class MenuPrincipalCajero {
 			System.out.println("(1): Consultar saldo");
 			System.out.println("(2): Hacer retiro");
 			System.out.println("(3): Hacer deposito");
-			System.out.println("(4): Ver movimientos");
-			System.out.println("(5): Salir");
+			System.out.println("(4): Hacer transferencia");
+			System.out.println("(5): Ver movimientos");
+			System.out.println("(6): Salir");
 			try {
 				opcion = sc.nextLine().strip();
 				parseOpcion = Integer.parseInt(opcion);
@@ -40,9 +41,12 @@ public class MenuPrincipalCajero {
 				this.deposito();
 				break;
 			case 4:
-				this.movimientos();
+				this.transferencia();
 				break;
 			case 5:
+				this.movimientos();
+				break;
+			case 6:
 				salida = 1;
 				break;
 			default:
@@ -123,6 +127,48 @@ public class MenuPrincipalCajero {
 			bd.deposito(this.rut, this.dv, this.id, this.saldo, monto);
 		}
 	}
+	private void transferencia() {
+		String rutTransferencia, dvTransferencia, idTransferencia = "";
+		ArrayList<String> cuenta = new ArrayList<String>();
+		while(true) {
+			System.out.println("Presione (q) para volver al menu anterior");
+			System.out.print("Ingrese el rut de la persona a transferir (Sin puntos, guion ni dv): ");
+			rutTransferencia = sc.nextLine().toLowerCase().strip();
+			if(rutTransferencia.equals("q")) {break;}
+			System.out.print("Ingrese el dv de la persona a transferir: ");
+			dvTransferencia = sc.nextLine().toLowerCase().strip();
+			if(dvTransferencia.equals("q")) {break;}
+			if(rutTransferencia.equals(this.rut) && dvTransferencia.equals(this.dv)) {
+				System.out.println("\nNo es posible hacerte una transferencia a ti mismo");
+			}else {
+				boolean datosValidos = MenuInicioCajero.validarDatosIngresados(rutTransferencia, dvTransferencia, "0000"); //Hago hardcode con la clave porque el metodo lo requiere
+																											//No hago nada con este valor
+				if(datosValidos) {
+					cuenta = bd.cuentaExiste(rutTransferencia, dvTransferencia);
+					if(cuenta.size() > 0) {
+						idTransferencia = cuenta.get(0); //id se encuentra en el indice 0
+						float saldoTransferencia = Float.parseFloat(cuenta.get(6)); //saldo se encuentra en el indice 6
+						float monto = this.ingresarMonto("transferir");
+						if(monto == 0F) {break;}
+						if(monto > this.saldo) {
+							System.out.println("\nNo tienes saldo suficiente para realizar esta operacion");
+						}else {
+							this.saldo -= monto;
+							saldoTransferencia += monto;
+							bd.transferencia(this.rut, this.dv, this.id, this.saldo, rutTransferencia, dvTransferencia, idTransferencia, saldoTransferencia, monto);
+						}
+						
+					}else {
+						System.out.println("\nEl usuario ingresado no esta registrado");
+					}
+				}else {
+					System.out.println("\nLos datos ingresados no son validos");
+				}
+			}
+			break;
+			
+		}
+	}
 	private float ingresarMonto(String tipoOperacion) {
 		Float parseOpcionFloat = 0F;
 		while(true) {
@@ -156,9 +202,12 @@ public class MenuPrincipalCajero {
 			Collections.reverse(movimientos);
 			//i Va a incrementar de 3 en 3
 			for(int i =0; i < movimientos.size(); i+=3) {
-				if(movimientos.get(i + 1).equals("SE REALIZO UN RETIRO")) {
+				if(movimientos.get(i + 1).equals("SE REALIZO UN RETIRO") 
+				|| movimientos.get(i + 1).contains("SE REALIZO UNA TRANSFERENCIA")) {
+					
 					signo = "-$";
-				}else if(movimientos.get(i + 1).equals("SE REALIZO UN DEPOSITO")) {
+				}else if(movimientos.get(i + 1).equals("SE REALIZO UN DEPOSITO")
+				|| movimientos.get(i + 1).contains("RECIBIO UNA TRANSFERENCIA")) {
 					signo = "+$";
 				}
 				System.out.println(signo + movimientos.get(i + 2) + ". " + movimientos.get(i+1) + " con fecha " + movimientos.get(i));
