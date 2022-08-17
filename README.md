@@ -25,7 +25,7 @@ Para iniciar sesion, elegimos la segunda opcion en el menu principal. Nos pedira
 
 Si la cuenta esta registrada y los datos son correctos, se nos mostrara el menu del cajero:
 
-![image](https://user-images.githubusercontent.com/107152796/182441108-7cf94771-ae92-430d-b0aa-3b36ac576b78.png)
+![image](https://user-images.githubusercontent.com/107152796/185246146-afe3187d-92fa-4cc0-814e-29dfede564c7.png)
 
 Tendremos distintas opciones. Como acabamos de crear la cuenta, si revisamos nuestro saldo, nos aparecera que tenemos $0.0:
 
@@ -45,12 +45,28 @@ Dependiendo de la opcion que eligamos, realizaremos un retiro por esa cantidad d
 
 ![image](https://user-images.githubusercontent.com/107152796/182443736-07580777-660b-458d-81f8-f98a26475ec4.png)
 
+Para realizar una transferencia, elegimos la opcion que hace referencia a esta accion. Ya aqui, se nos pedira que ingresemos el rut de la persona
+a la cual le queremos transferir. Anteriormente, registramos otra cuenta para poder realizar este ejercicio. Llenamos los datos y nos pedira
+que ingresemos el monto a transferir:
+
+![image](https://user-images.githubusercontent.com/107152796/185246444-2d3d0337-cf7e-4f07-b833-c0bea9251de1.png)
+
+Ingresamos el monto y nos aparecera esto:
+
+![image](https://user-images.githubusercontent.com/107152796/185246552-1bcb00dc-3445-40c7-a97f-b2d51e4f57da.png)
+
+
 Para ver todos los movimientos que hemos realizado, elegimos la opcion de ver movimientos. Nos mostrara informacion de las transacciones que hemos
 realizado, incluyendo su fecha:
 
-![image](https://user-images.githubusercontent.com/107152796/182444093-869e9d24-4e17-4fe4-bfff-0a2674dddc07.png)
+![image](https://user-images.githubusercontent.com/107152796/185246623-d6b33692-df9a-46e7-ba96-823f8982e1e7.png)
 
-Para salir, elegimos la ultima opcion que nos aparece en el menu del cajero, y luego elegimos la ultima opcion que nos aparece en el menu de inicio
+Para verificar que se realizo la transferencia correctamente, iniciamos sesion con la cuenta que creamos anteriormente y vemos sus movimientos:
+
+![image](https://user-images.githubusercontent.com/107152796/185246746-0b20ac38-806d-47e3-a1e1-193da046966d.png)
+
+Como podemos ver, hemos recibido una transferencia de un usuario con el rut de 11111111-k, el cual es el rut de la cuenta que creamos para hacer este
+ejemplo
 
 
 
